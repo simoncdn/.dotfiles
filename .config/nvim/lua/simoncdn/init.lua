@@ -14,8 +14,23 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
-  "folke/which-key.nvim",
-  { "folke/neoconf.nvim", cmd = "Neoconf" },
-  "folke/neodev.nvim",
-}, opts)
+require("lazy").setup({spec = "simoncdn.plugins"}, {
+  ui = {
+    -- If you have a Nerd Font, set icons to an empty table which will use the
+    -- default lazy.nvim defined Nerd Font icons otherwise define a unicode icons table
+    icons = vim.g.have_nerd_font and {} or {
+      cmd = '⌘',
+      config = '🛠',
+      event = '📅',
+      ft = '📂',
+      init = '⚙',
+      keys = '🗝',
+      plugin = '🔌',
+      runtime = '💻',
+      require = '🌙',
+      source = '📄',
+      start = '🚀',
+      task = '📌',
+      lazy = '💤 ',
+    },
+  }})
