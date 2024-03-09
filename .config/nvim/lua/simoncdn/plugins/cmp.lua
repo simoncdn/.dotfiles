@@ -2,14 +2,14 @@ return {
 	"hrsh7th/nvim-cmp",
 	event = "InsertEnter",
 	dependencies = {
-		"hrsh7th/cmp-buffer",     -- source for text in buffer
-		"hrsh7th/cmp-path",       -- source for file system paths
-		"L3MON4D3/LuaSnip",       -- snippet engine
+		"hrsh7th/cmp-buffer", -- source for text in buffer
+		"hrsh7th/cmp-path", -- source for file system paths
+		"L3MON4D3/LuaSnip", -- snippet engine
 		"saadparwaiz1/cmp_luasnip", -- for autocompletion
 		"rafamadriz/friendly-snippets", -- useful snippets
-		"onsails/lspkind.nvim",   -- vs-code like pictograms
+		"onsails/lspkind.nvim", -- vs-code like pictograms
 		-- "hrsh7th/cmp-emoji",
-		"hrsh7th/cmp-nvim-lsp",   -- source for nvim lsp
+		"hrsh7th/cmp-nvim-lsp", -- source for nvim lsp
 	},
 
 	config = function()
@@ -26,15 +26,19 @@ return {
 		luasnip.config.setup({
 			region_check_events = "CursorMoved",
 			delete_check_events = "TextChanged",
-			vim.keymap.set({ "i" }, "<C-K>", function() luasnip.expand() end, { silent = true }),
+			vim.keymap.set({ "i" }, "<C-K>", function()
+				luasnip.expand()
+			end, { silent = true }),
 			-- vim.keymap.set({ "i", "s" }, "<C-L>", function() luasnip.jump(1) end, { silent = true }),
-			vim.keymap.set({ "i", "s" }, "<C-J>", function() luasnip.jump(-1) end, { silent = true }),
+			vim.keymap.set({ "i", "s" }, "<C-J>", function()
+				luasnip.jump(-1)
+			end, { silent = true }),
 
 			vim.keymap.set({ "i", "s" }, "<C-E>", function()
 				if luasnip.choice_active() then
 					luasnip.change_choice(1)
 				end
-			end, { silent = true })
+			end, { silent = true }),
 		})
 
 		luasnip.filetype_extend("all", { "_" })
@@ -64,7 +68,7 @@ return {
 				["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
 				["<C-b>"] = cmp.mapping.scroll_docs(-4),
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
-				["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
+				["<C-c>"] = cmp.mapping.complete(), -- show completion suggestions
 				["<C-e>"] = cmp.mapping.abort(), -- close completion window
 				["<Enter>"] = cmp.mapping.confirm({ select = false }),
 			}),
