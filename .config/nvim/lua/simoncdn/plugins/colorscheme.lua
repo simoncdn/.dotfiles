@@ -18,7 +18,7 @@ return {
 	-- 		catppuccin.setup({
 	-- 			flavour = "macchiato", -- latte, frappe, macchiato, mocha
 	-- 			background = "dark",
-	-- 			transparent_background = false, -- disables setting the background color.
+	-- 			transparent_background = true, -- disables setting the background color.
 	-- 			show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
 	-- 			term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
 	-- 			dim_inactive = {
@@ -61,7 +61,7 @@ return {
 	-- 				nvimtree = true,
 	-- 				treesitter = true,
 	-- 				notify = false,
-	-- 				lsp_trouble = false,
+	-- 				lsp_trouble = true,
 	-- 				lsp_saga = false,
 	-- 				gitgutter = false,
 	-- 				telescope = true,
@@ -76,7 +76,7 @@ return {
 	-- 			},
 	-- 		})
 	-- 		vim.cmd.colorscheme("catppuccin")
-	-- 		-- ColorMyPencils()
+	-- 		ColorMyPencils()
 	-- 	end,
 	-- },
 }

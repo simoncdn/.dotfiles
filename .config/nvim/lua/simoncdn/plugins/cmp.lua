@@ -8,7 +8,7 @@ return {
 		"saadparwaiz1/cmp_luasnip", -- for autocompletion
 		"rafamadriz/friendly-snippets", -- useful snippets
 		"onsails/lspkind.nvim", -- vs-code like pictograms
-		-- "hrsh7th/cmp-emoji",
+		"hrsh7th/cmp-emoji",
 		"hrsh7th/cmp-nvim-lsp", -- source for nvim lsp
 	},
 
@@ -68,7 +68,7 @@ return {
 				["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
 				["<C-b>"] = cmp.mapping.scroll_docs(-4),
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
-				["<C-c>"] = cmp.mapping.complete(), -- show completion suggestions
+				["<C-y>"] = cmp.mapping.complete(), -- show completion suggestions
 				["<C-e>"] = cmp.mapping.abort(), -- close completion window
 				["<Enter>"] = cmp.mapping.confirm({ select = false }),
 			}),
@@ -99,11 +99,11 @@ return {
 						word = str.oneline(word)
 
 						-- concatenates the string
-						-- local max = 50
-						-- if string.len(word) >= max then
-						-- 	local before = string.sub(word, 1, math.floor((max - 3) / 2))
-						-- 	word = before .. "..."
-						-- end
+						local max = 50
+						if string.len(word) >= max then
+							local before = string.sub(word, 1, math.floor((max - 3) / 2))
+							word = before .. "..."
+						end
 
 						if
 							entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet
