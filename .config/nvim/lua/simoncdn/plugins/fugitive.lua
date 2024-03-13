@@ -8,6 +8,8 @@ return {
 		vim.keymap.set("n", "<leader>gd", ":Git diff<CR>")
 		vim.keymap.set("n", "<leader>gp", ":Git pull<CR>")
 		vim.keymap.set("n", "<leader>gP", ":Git push<CR>")
+		vim.keymap.set("n", "<leader>gr", ":Git rebase -i<CR>")
+		vim.keymap.set("n", "<leader>grm", ":Git rebase -i main<CR>")
 		vim.keymap.set("n", "gu", "<cmd>diffget //2<CR>")
 		vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
 
