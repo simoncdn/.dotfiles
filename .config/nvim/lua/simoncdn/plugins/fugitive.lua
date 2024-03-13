@@ -6,6 +6,10 @@ return {
 		vim.keymap.set("n", "<leader>gb", ":Git blame<CR>")
 		vim.keymap.set("n", "<leader>gl", ":Git log<CR>")
 		vim.keymap.set("n", "<leader>gd", ":Git diff<CR>")
+		vim.keymap.set("n", "<leader>gp", ":Git pull<CR>")
+		vim.keymap.set("n", "<leader>gP", ":Git push<CR>")
+		vim.keymap.set("n", "gu", "<cmd>diffget //2<CR>")
+		vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
 
 		local Simoncdn_Fugitive = vim.api.nvim_create_augroup("Simoncdn_Fugitive", {})
 
@@ -34,8 +38,5 @@ return {
 				vim.keymap.set("n", "<leader>t", ":Git push -u origin ", opts)
 			end,
 		})
-
-		vim.keymap.set("n", "gu", "<cmd>diffget //2<CR>")
-		vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
 	end,
 }
