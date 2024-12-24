@@ -116,17 +116,17 @@ cmd-shift-equal = 'resize smart +50'
 cmd-shift-f = 'fullscreen'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-cmd-1 = 'workspace 1'
-cmd-2 = 'workspace 2'
-cmd-3 = 'workspace 3'
-cmd-4 = 'workspace 4'
+cmd-1 = 'workspace 1' # Kitty
+cmd-2 = 'workspace 2' # Browser
+cmd-3 = 'workspace 3' # Notion
+cmd-4 = 'workspace 4' # Music
 cmd-5 = 'workspace 5'
 
 cmd-6 = 'workspace 6'
 cmd-7 = 'workspace 7'
 cmd-8 = 'workspace 8'
 cmd-9 = 'workspace 9'
-cmd-0 = 'workspace 10'
+cmd-0 = 'workspace 10' # Slack
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 cmd-shift-1 = 'move-node-to-workspace 1'
