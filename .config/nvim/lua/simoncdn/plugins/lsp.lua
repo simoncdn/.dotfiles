@@ -7,7 +7,7 @@ return {
 		dependencies = {
 			"hrsh7th/nvim-cmp",
 			"hrsh7th/cmp-nvim-lsp",
-			"williamboman/mason-lspconfig.nvim"
+			"williamboman/mason-lspconfig.nvim",
 		},
 
 		config = function()
@@ -69,20 +69,21 @@ return {
 					-- Ts setup
 					["ts_ls"] = function()
 						local mason_registry = require("mason-registry")
-						local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
-								.. "/node_modules/@vue/language-server"
+						local vue_language_server_path = mason_registry
+							.get_package("vue-language-server")
+							:get_install_path() .. "/node_modules/@vue/language-server"
 
 						lsp.ts_ls.setup({
 							capabilities = lsp_capabilities,
-							cmd = { 'typescript-language-server', '--stdio' },
+							cmd = { "typescript-language-server", "--stdio" },
 							root_dir = lsp.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
 							filetypes = {
-								'javascript',
-								'javascriptreact',
-								'javascript.jsx',
-								'typescript',
-								'typescriptreact',
-								'typescript.tsx',
+								"javascript",
+								"javascriptreact",
+								"javascript.jsx",
+								"typescript",
+								"typescriptreact",
+								"typescript.tsx",
 							},
 							init_options = {
 								plugins = {
@@ -130,24 +131,23 @@ return {
 						})
 					end,
 				},
-
 			})
 
 			-- Appearance
 			vim.lsp.handlers["textDocument/hover"] = function(_, result, ctx, config)
 				config = config
-						or {
-							border = {
-								{ "╭", "FloatBorder" },
-								{ "─", "FloatBorder" },
-								{ "╮", "FloatBorder" },
-								{ "│", "FloatBorder" },
-								{ "╯", "FloatBorder" },
-								{ "─", "FloatBorder" },
-								{ "╰", "FloatBorder" },
-								{ "│", "FloatBorder" },
-							},
-						}
+					or {
+						border = {
+							{ "╭", "FloatBorder" },
+							{ "─", "FloatBorder" },
+							{ "╮", "FloatBorder" },
+							{ "│", "FloatBorder" },
+							{ "╯", "FloatBorder" },
+							{ "─", "FloatBorder" },
+							{ "╰", "FloatBorder" },
+							{ "│", "FloatBorder" },
+						},
+					}
 				config.focus_id = ctx.method
 				if not (result and result.contents) then
 					return
@@ -163,7 +163,7 @@ return {
 				float = {
 					border = "rounded",
 				},
-				virtual_text = true
+				virtual_text = true,
 			})
 
 			-- Mapping
@@ -182,12 +182,20 @@ return {
 					vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
 					vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 					vim.keymap.set("n", "<leader>gv", ":vsplit | lua vim.lsp.buf.definition(, opts)<CR>", opts)
-					vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
+					vim.keymap.set("n", "<leader>vws", function()
+						vim.lsp.buf.workspace_symbol()
+					end, opts)
 					vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
-					vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-					vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
+					vim.keymap.set("n", "<leader>vrr", function()
+						vim.lsp.buf.references()
+					end, opts)
+					vim.keymap.set("n", "<leader>vrn", function()
+						vim.lsp.buf.rename()
+					end, opts)
 					vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-					vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+					vim.keymap.set("i", "<C-h>", function()
+						vim.lsp.buf.signature_help()
+					end, opts)
 				end,
 			})
 		end,
@@ -203,7 +211,7 @@ return {
 			-- Autocompletion
 			"hrsh7th/cmp-nvim-lsp", -- source for nvim lsp
 			"hrsh7th/cmp-buffer", -- source for text in buffer
-			"hrsh7th/cmp-path",  -- source for file system paths
+			"hrsh7th/cmp-path", -- source for file system paths
 			"hrsh7th/cmp-cmdline", -- source for cmdline
 
 			-- Snippets
@@ -218,15 +226,19 @@ return {
 			luasnip.config.setup({
 				region_check_events = "CursorMoved",
 				delete_check_events = "TextChanged",
-				vim.keymap.set({ "i" }, "<C-K>", function() luasnip.expand() end, { silent = true }),
+				vim.keymap.set({ "i" }, "<C-K>", function()
+					luasnip.expand()
+				end, { silent = true }),
 				-- vim.keymap.set({ "i", "s" }, "<C-L>", function() luasnip.jump(1) end, { silent = true }),
-				vim.keymap.set({ "i", "s" }, "<C-J>", function() luasnip.jump(-1) end, { silent = true }),
+				vim.keymap.set({ "i", "s" }, "<C-J>", function()
+					luasnip.jump(-1)
+				end, { silent = true }),
 
 				vim.keymap.set({ "i", "s" }, "<C-E>", function()
 					if luasnip.choice_active() then
 						luasnip.change_choice(1)
 					end
-				end, { silent = true })
+				end, { silent = true }),
 			})
 			luasnip.filetype_extend("all", { "_" })
 			require("luasnip.loaders.from_snipmate").load({ paths = { "~/.config/nvim/lua/simoncdn/snippets" } })
@@ -251,7 +263,7 @@ return {
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-					["<C-e>"] = cmp.mapping.abort(),   -- close completion window
+					["<C-e>"] = cmp.mapping.abort(), -- close completion window
 					["<Enter>"] = cmp.mapping.confirm({ select = false }),
 				}),
 
@@ -268,7 +280,7 @@ return {
 		"williamboman/mason.nvim",
 
 		config = function()
-			local mason = require('mason')
+			local mason = require("mason")
 
 			mason.setup({
 				ui = {
@@ -277,9 +289,9 @@ return {
 					icons = {
 						package_installed = "✓",
 						package_pending = "➜",
-						package_uninstalled = "✗"
-					}
-				}
+						package_uninstalled = "✗",
+					},
+				},
 			})
 		end,
 	},

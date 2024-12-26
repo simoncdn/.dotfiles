@@ -1,26 +1,26 @@
 return {
-	'nvim-telescope/telescope.nvim',
+	"nvim-telescope/telescope.nvim",
 
-	tag = '0.1.8',
+	tag = "0.1.8",
 
 	dependencies = {
-		'nvim-lua/plenary.nvim',
-		{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-		{ 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font }
+		"nvim-lua/plenary.nvim",
+		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+		{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
 	},
 
 	config = function()
-		local telescope = require('telescope')
-		local builtin = require('telescope.builtin')
-		local themes = require('telescope.themes')
+		local telescope = require("telescope")
+		local builtin = require("telescope.builtin")
+		local themes = require("telescope.themes")
 
-		telescope.load_extension('fzf')
-		telescope.setup {
+		telescope.load_extension("fzf")
+		telescope.setup({
 			pickers = {},
 			extensions = {
-				fzf = {}
-			}
-		}
+				fzf = {},
+			},
+		})
 
 		-- Keybindings
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find buffers" })
@@ -32,24 +32,21 @@ return {
 		vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "Find diagnostics" })
 
 		vim.keymap.set("n", "<leader>en", function()
-				builtin.find_files {
-					cwd = vim.fn.stdpath("config")
-				}
-			end,
-			{ desc = "Edit Neovim config" })
+			builtin.find_files({
+				cwd = vim.fn.stdpath("config"),
+			})
+		end, { desc = "Edit Neovim config" })
 
 		vim.keymap.set("n", "<leader>/", function()
-				local opts = themes.get_dropdown({ previewer = false })
-				builtin.current_buffer_fuzzy_find(opts)
-			end,
-			{ desc = "Fuzzily search in current buffer" })
+			local opts = themes.get_dropdown({ previewer = false })
+			builtin.current_buffer_fuzzy_find(opts)
+		end, { desc = "Fuzzily search in current buffer" })
 
 		vim.keymap.set("n", "<leader>s/", function()
-				builtin.live_grep({
-					grep_open_files = true,
-					prompt_title = "Live Grep in open files",
-				})
-			end,
-			{ desc = "Live grep in open files" })
-	end
+			builtin.live_grep({
+				grep_open_files = true,
+				prompt_title = "Live Grep in open files",
+			})
+		end, { desc = "Live grep in open files" })
+	end,
 }

@@ -9,7 +9,7 @@ end
 return {
 	{
 		"folke/tokyonight.nvim",
-		name = 'tokyonight',
+		name = "tokyonight",
 		priority = 1000,
 		config = function()
 			require("tokyonight").setup({
@@ -30,7 +30,7 @@ return {
 				dim_inactiv = false,
 				cache = true,
 				plugins = {
-					auto = true
+					auto = true,
 				},
 			})
 			vim.cmd("colorscheme tokyonight")

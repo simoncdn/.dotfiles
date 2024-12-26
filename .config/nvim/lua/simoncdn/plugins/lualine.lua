@@ -1,16 +1,15 @@
 return {
-	'nvim-lualine/lualine.nvim',
+	"nvim-lualine/lualine.nvim",
 
 	dependencies = {
-		'nvim-tree/nvim-web-devicons'
+		"nvim-tree/nvim-web-devicons",
 	},
 
-
 	config = function()
-		local lualine = require('lualine')
-		local colors = require('tokyonight.colors').setup()
+		local lualine = require("lualine")
+		local colors = require("tokyonight.colors").setup()
 		local time = function()
-			return os.date('%H:%M')
+			return os.date("%H:%M")
 		end
 		local custom_theme = {
 			normal = {
@@ -46,32 +45,32 @@ return {
 			},
 		}
 
-		lualine.setup {
+		lualine.setup({
 			options = {
 				icons_enabled = true,
 				theme = custom_theme,
 				normal = {
-					c = { bg = nil }
+					c = { bg = nil },
 				},
 				insert = {
-					c = { bg = nil }
+					c = { bg = nil },
 				},
 				visual = {
-					c = { bg = nil }
+					c = { bg = nil },
 				},
 				replace = {
-					c = { bg = nil }
+					c = { bg = nil },
 				},
 				command = {
-					c = { bg = nil }
+					c = { bg = nil },
 				},
 				inactive = {
-					c = { bg = nil }
+					c = { bg = nil },
 				},
 				-- component_separators = { left = '', right = '' },
 				-- section_separators = { left = '', right = '' },
-				section_separators = { left = '', right = '' },
-				component_separators = { left = '', right = '' },
+				section_separators = { left = "", right = "" },
+				component_separators = { left = "", right = "" },
 				disabled_filetypes = {
 					statusline = {},
 					winbar = {},
@@ -84,29 +83,29 @@ return {
 					statusline = 100,
 					tabline = 100,
 					winbar = 100,
-				}
+				},
 			},
 			sections = {
-				lualine_a = { 'mode' },
-				lualine_b = { 'branch', 'diff', 'diagnostics' },
-				lualine_c = { 'filename' },
+				lualine_a = { "mode" },
+				lualine_b = { "branch", "diff", "diagnostics" },
+				lualine_c = { "filename" },
 
-				lualine_x = { 'progress' },
-				lualine_y = { 'fileformat' },
-				lualine_z = { time }
+				lualine_x = { "progress" },
+				lualine_y = { "fileformat" },
+				lualine_z = { time },
 			},
 			inactive_sections = {
 				lualine_a = {},
 				lualine_b = {},
-				lualine_c = { 'filename' },
-				lualine_x = { 'location' },
+				lualine_c = { "filename" },
+				lualine_x = { "location" },
 				lualine_y = {},
-				lualine_z = {}
+				lualine_z = {},
 			},
 			tabline = {},
 			winbar = {},
 			inactive_winbar = {},
-			extensions = {}
-		}
+			extensions = {},
+		})
 	end,
 }

@@ -11,7 +11,7 @@ return {
 		},
 
 		config = function()
-			vim.keymap.set('n', '<leader>b', ':Neotree toggle filesystem reveal right<CR>', {})
+			vim.keymap.set("n", "<leader>b", ":Neotree toggle filesystem reveal right<CR>", {})
 		end,
-	}
+	},
 }
