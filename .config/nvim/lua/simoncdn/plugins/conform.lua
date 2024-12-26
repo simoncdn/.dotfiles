@@ -5,6 +5,7 @@ return {
 		local conform = require("conform")
 		-- Keybindings
 		vim.keymap.set("n", "<leader>f", function()
+			vim.lsp.buf.format()
 			conform.format()
 		end, { desc = "Format code" })
 
@@ -51,6 +52,9 @@ return {
 					-- cwd means "config working directory"
 					require_cwd = true,
 					cwd = require("conform.util").root_file({
+						".eslintrc.js",
+						".eslintrc.cjs",
+						".eslintrc.mjs",
 						"eslint.config.js",
 						"eslint.config.cjs",
 						"eslint.config.mjs",
