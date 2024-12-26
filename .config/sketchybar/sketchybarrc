@@ -1,7 +1,6 @@
 #!/bin/sh
 
 source "$CONFIG_DIR/colors.sh" # Load the colors
-source "$CONFIG_DIR/icons.sh" # Load the icons
 
 ITEM_DIR="$CONFIG_DIR/items" # Directory where the items are configured
 PLUGIN_DIR="$CONFIG_DIR/plugins" # Directory where the plugins are configured
@@ -34,7 +33,7 @@ bar=(
   position=$POSITION          # Bar position
   height=$HEIGHT              # Bar height
   margin=8                    # Overall margin around the bar
-  y_offset=5                  # Space b/w top of the screen and the bar
+  y_offset=4                  # Space b/w top of the screen and the bar
   corner_radius=$RADIUS       # Bar corner radius
   border_width=0              # 0 for no border
   blur_radius=0               # 0 for the full transparency
@@ -77,7 +76,17 @@ sketchybar --default "${default[@]}"
 
 # Left Items
 # source "$ITEM_DIR/apple.sh"
+source "$ITEM_DIR/logo.sh"
 source "$ITEM_DIR/front_app.sh"
+
+sketchybar --add bracket left_bar logo front_app
+sketchybar --set left_bar \
+  background.color=$COLOR_BACKGROUND \
+  blur_radius=$BLUR \
+  background.corner_radius=$RADIUS \
+  background.height=$HEIGHT \
+  background.border_color=$COLOR_GREY \
+  background.border_width=1
 
 # Right Items
 source "$ITEM_DIR/calendar.sh"
@@ -89,7 +98,7 @@ sketchybar --set right_bar \
   blur_radius=$BLUR \
   background.corner_radius=$RADIUS \
   background.height=$HEIGHT \
-  # background.border_color=$COLOR_BLUE \
+  background.border_color=$COLOR_GREY \
   background.border_width=1
 
 sketchybar --hotload on
