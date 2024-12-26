@@ -1,0 +1,100 @@
+#!/bin/sh
+
+source "$CONFIG_DIR/colors.sh" # Load the colors
+source "$CONFIG_DIR/icons.sh" # Load the icons
+
+ITEM_DIR="$CONFIG_DIR/items" # Directory where the items are configured
+PLUGIN_DIR="$CONFIG_DIR/plugins" # Directory where the plugins are configured
+
+# Variables
+FONT_ICONS="Hack Nerd Font"
+# FONT="Hack Nerd Font"
+FONT="DankMono Nerd Font"
+PADDING_L=4
+PADDING_R=4
+RADIUS=8
+POSITION=top
+HEIGHT=30
+BLUR=10
+
+# aerospace setting
+AEROSPACE_FOCUSED_MONITOR_NO=$(aerospace list-workspaces --focused)
+AEROSPACE_LIST_OF_WINDOWS_IN_FOCUSED_MONITOR=$(aerospace list-windows --workspace $AEROSPACE_FOCUSED_MONITOR_NO | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
+
+# Setting up and starting the helper process
+HELPER=git.felix.helper
+killall helper
+(cd $CONFIG_DIR/helper && make)
+$CONFIG_DIR/helper/helper $HELPER > /dev/null 2>&1 &
+
+
+# Bar Appearance
+bar=(
+  color=$COLOR_TRANSPARENT			# Bar color
+  position=$POSITION          # Bar position
+  height=$HEIGHT              # Bar height
+  margin=8                    # Overall margin around the bar
+  y_offset=5                  # Space b/w top of the screen and the bar
+  corner_radius=$RADIUS       # Bar corner radius
+  border_width=0              # 0 for no border
+  blur_radius=0               # 0 for the full transparency
+  padding_left=0
+  padding_right=0
+  topmost=off                 # Draw the bar over a window and the stock menubar
+  #sticky=on                   # Bar stays on when changing workspace
+)
+sketchybar --bar "${bar[@]}"
+
+# Defaults
+default=(
+	padding_left=0
+  padding_right=0
+
+	background.color=$COLOR_BACKGROUND
+  background.border_color=$COLOR_BLUE
+  background.border_width=0
+  background.corner_radius=$RADIUS
+  background.height=$HEIGHT
+  background.drawing=off
+
+
+	icon.font="$FONT_ICONS:Regular:14.24"
+  icon.color=$COLOR_FOREGROUND
+  icon.highlight_color=$COLOR_PURPLE
+  icon.padding_left=$PADDING_L
+  icon.padding_right=$PADDING_R
+  icon.drawing=on
+
+	label.font="$FONT:Regular:14.24"
+  label.color=$COLOR_FOREGROUND
+  label.highlight_color=$COLOR_PURPLE
+  label.padding_left=$PADDING_L
+  label.padding_right=$PADDING_R
+  label.drawing=on
+)
+
+sketchybar --default "${default[@]}"
+
+# Left Items
+# source "$ITEM_DIR/apple.sh"
+source "$ITEM_DIR/front_app.sh"
+
+# Right Items
+source "$ITEM_DIR/calendar.sh"
+source "$ITEM_DIR/battery.sh"
+
+sketchybar --add bracket right_bar calendar battery
+sketchybar --set right_bar \
+  background.color=$COLOR_BACKGROUND \
+  blur_radius=$BLUR \
+  background.corner_radius=$RADIUS \
+  background.height=$HEIGHT \
+  # background.border_color=$COLOR_BLUE \
+  background.border_width=1
+
+sketchybar --hotload on
+
+# Forcing all item scripts to run (never do this outside of sketchybarrc)
+sketchybar --update
+
+echo "SketchyBar configuration loaded..."
