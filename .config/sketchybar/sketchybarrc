@@ -16,17 +16,6 @@ POSITION=top
 HEIGHT=30
 BLUR=10
 
-# aerospace setting
-AEROSPACE_FOCUSED_MONITOR_NO=$(aerospace list-workspaces --focused)
-AEROSPACE_LIST_OF_WINDOWS_IN_FOCUSED_MONITOR=$(aerospace list-windows --workspace $AEROSPACE_FOCUSED_MONITOR_NO | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
-
-# Setting up and starting the helper process
-HELPER=git.felix.helper
-killall helper
-(cd $CONFIG_DIR/helper && make)
-$CONFIG_DIR/helper/helper $HELPER > /dev/null 2>&1 &
-
-
 # Bar Appearance
 bar=(
   color=$COLOR_TRANSPARENT			# Bar color
@@ -75,31 +64,26 @@ default=(
 sketchybar --default "${default[@]}"
 
 # Left Items
-# source "$ITEM_DIR/apple.sh"
 source "$ITEM_DIR/logo.sh"
+source "$ITEM_DIR/aerospace.sh"
 source "$ITEM_DIR/front_app.sh"
-
-sketchybar --add bracket left_bar logo front_app
-sketchybar --set left_bar \
-  background.color=$COLOR_BACKGROUND \
-  blur_radius=$BLUR \
-  background.corner_radius=$RADIUS \
-  background.height=$HEIGHT \
-  background.border_color=$COLOR_GREY \
-  background.border_width=1
+source "$ITEM_DIR/left_bar.sh"
 
 # Right Items
 source "$ITEM_DIR/calendar.sh"
 source "$ITEM_DIR/battery.sh"
+source "$ITEM_DIR/right_bar.sh"
 
-sketchybar --add bracket right_bar calendar battery
-sketchybar --set right_bar \
-  background.color=$COLOR_BACKGROUND \
-  blur_radius=$BLUR \
-  background.corner_radius=$RADIUS \
-  background.height=$HEIGHT \
-  background.border_color=$COLOR_GREY \
-  background.border_width=1
+
+sketchybar --add event aerospace_workspace_change
+sketchybar --add event front_app_switched
+
+for sid in $(aerospace list-workspaces --all); do
+    sketchybar --add item space.$sid left \
+        --subscribe space.$sid aerospace_workspace_change \
+				--set space.$sid \
+				script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+done
 
 sketchybar --hotload on
 
