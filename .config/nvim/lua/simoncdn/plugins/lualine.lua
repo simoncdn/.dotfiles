@@ -8,9 +8,6 @@ return {
 	config = function()
 		local lualine = require("lualine")
 		local colors = require("tokyonight.colors").setup()
-		local time = function()
-			return os.date("%H:%M")
-		end
 		local custom_theme = {
 			normal = {
 				a = { bg = colors.blue, fg = colors.black },
@@ -87,12 +84,12 @@ return {
 			},
 			sections = {
 				lualine_a = { "mode" },
-				lualine_b = { "branch", "diff", "diagnostics" },
+				lualine_b = { "branch" },
 				lualine_c = { "filename" },
 
-				lualine_x = { "progress" },
-				lualine_y = { "fileformat" },
-				lualine_z = { time },
+				lualine_x = { "diagnostics" },
+				lualine_y = { "diff" },
+				lualine_z = { "progress" },
 			},
 			inactive_sections = {
 				lualine_a = {},
