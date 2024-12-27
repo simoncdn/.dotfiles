@@ -18,22 +18,22 @@ config = {
 		left = 32,
 		right = 32,
 		top = 32,
-		bottom = 32,
+		bottom = 12,
 	},
 
 	-- Set the theme
-	color_scheme = "tokyonight_night",
+	color_scheme = "Tokyo Night",
 	colors = {
 		background = "#0e101a",
 	},
 
 	-- Font configuration
 	font = wezterm.font("Dank Mono", {
-		weight = "Bold",
+		weight = "Regular",
 		italic = false,
 	}),
 	line_height = 1.3,
-	font_size = 16.0,
+	font_size = 14.0,
 }
 
 -- and finally, return the configuration to wezterm
