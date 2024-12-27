@@ -4,8 +4,6 @@ local wezterm = require("wezterm")
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
--- This is where you actually apply your config choices
-
 config = {
 	automatically_reload_config = true,
 
@@ -13,6 +11,7 @@ config = {
 	enable_tab_bar = false,
 	window_decorations = "RESIZE",
 
+	-- Set the window
 	window_background_opacity = 0.85,
 	macos_window_background_blur = 30,
 	window_padding = {
@@ -21,19 +20,19 @@ config = {
 		top = 32,
 		bottom = 32,
 	},
-	-- Set the default cursor style
-	-- cursor_style = "BlinkingBlock",
 
-	-- background								#0e101a
-	-- background_blur						30
-	-- For example, changing the color scheme:
+	-- Set the theme
 	color_scheme = "tokyonight_night",
 	colors = {
 		background = "#0e101a",
 	},
 
 	-- Font configuration
-	font = wezterm.font("Dank Mono", { weight = "Bold", italic = false }),
+	font = wezterm.font("Dank Mono", {
+		weight = "Bold",
+		italic = false,
+	}),
+	line_height = 1.3,
 	font_size = 16.0,
 }
 
