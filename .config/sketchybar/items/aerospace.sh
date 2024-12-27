@@ -1,9 +1,6 @@
 #!/usr/bin/env sh
 
 aerospace=(
-	# icon=''
-	# icon.font="$FONT_ICONS:Bold:14.0"
-	# icon.color=$COLOR_PURPLE
 	icon.drawing=off
 
   label.font="$FONT:Bold:16.0"

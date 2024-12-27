@@ -8,15 +8,15 @@ if [ "$1" = "$FOCUSED_WORKSPACE" ]; then
 		sketchybar --set aerospace label="$FOCUSED_WORKSPACE"
 
 		# Adjust padding for keep the same width of the number
-		if [[ "$1" = '1' ]]; then
-			sketchybar --set aerospace label.padding_right=8
-		else
-			sketchybar --set aerospace label.padding_right=4
-		fi
+		# if [[ "$1" = '1' ]]; then
+		# 	sketchybar --set aerospace label.padding_right=8
+		# else
+		# 	sketchybar --set aerospace label.padding_right=4
+		# fi
 		
 		if [[ "$AEROSPACE_EMPTY_WORKSPACE" == *"$1"* ]]; then
-			sketchybar --set front_app label=".."
+			sketchybar --set front_app label="..." label.padding_right=12
 		else
-			sketchybar --set front_app label="$CURRENT_APP"
+			sketchybar --set front_app label="$CURRENT_APP" label.padding_right=8
 		fi
 fi
