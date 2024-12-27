@@ -7,8 +7,7 @@ PLUGIN_DIR="$CONFIG_DIR/plugins" # Directory where the plugins are configured
 
 # Variables
 FONT_ICONS="Hack Nerd Font"
-# FONT="Hack Nerd Font"
-FONT="DankMono Nerd Font"
+FONT="Dank Mono"
 PADDING_L=4
 PADDING_R=4
 RADIUS=8
