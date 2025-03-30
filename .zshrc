@@ -103,3 +103,10 @@ export NVM_DIR="$HOME/.nvm"
 
 # Starship
 eval "$(starship init zsh)"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/simon/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/simon/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/simon/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/simon/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"

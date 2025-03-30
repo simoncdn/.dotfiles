@@ -29,11 +29,12 @@ config = {
 
 	-- Font configuration
 	font = wezterm.font("Dank Mono", {
-		weight = "Regular",
+		-- weight = "Regular",
+		weight = "Bold",
 		italic = false,
 	}),
 	line_height = 1.3,
-	font_size = 14.0,
+	font_size = 16.0,
 }
 
 -- and finally, return the configuration to wezterm

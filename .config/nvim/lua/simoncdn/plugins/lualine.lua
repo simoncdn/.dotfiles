@@ -7,45 +7,11 @@ return {
 
 	config = function()
 		local lualine = require("lualine")
-		local colors = require("tokyonight.colors").setup()
-		local custom_theme = {
-			normal = {
-				a = { bg = colors.blue, fg = colors.black },
-				b = { bg = colors.fg_gutter, fg = colors.blue },
-				c = { bg = nil, fg = colors.fg_sidebar },
-			},
-
-			insert = {
-				a = { bg = colors.green, fg = colors.black },
-				b = { bg = colors.fg_gutter, fg = colors.green },
-			},
-
-			command = {
-				a = { bg = colors.yellow, fg = colors.black },
-				b = { bg = colors.fg_gutter, fg = colors.yellow },
-			},
-
-			visual = {
-				a = { bg = colors.magenta, fg = colors.black },
-				b = { bg = colors.fg_gutter, fg = colors.magenta },
-			},
-
-			inactive = {
-				a = { bg = colors.bg_statusline, fg = colors.blue },
-				b = { bg = colors.bg_statusline, fg = colors.fg_gutter, gui = "bold" },
-				c = { bg = nil, fg = colors.fg_gutter },
-			},
-
-			replace = {
-				a = { bg = colors.red, fg = colors.black },
-				b = { bg = colors.fg_gutter, fg = colors.red },
-			},
-		}
 
 		lualine.setup({
 			options = {
 				icons_enabled = true,
-				theme = custom_theme,
+				theme = "catppuccin",
 				normal = {
 					c = { bg = nil },
 				},

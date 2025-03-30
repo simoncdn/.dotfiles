@@ -67,7 +67,7 @@ inner.horizontal = 8
 inner.vertical =   8
 outer.left =       8
 outer.bottom =     8
-outer.top =        8
+outer.top =        [{ monitor."LG HDR 4K" = 42 }, 8]
 outer.right =      8
 
 # 'main' binding mode declaration
@@ -134,6 +134,8 @@ cmd-8 = 'workspace 8'
 cmd-9 = 'workspace 9'
 cmd-0 = 'workspace 10' # Slack
 
+cmd-p = 'workspace 11'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 cmd-shift-1 = 'move-node-to-workspace 1'
 cmd-shift-2 = 'move-node-to-workspace 2'
@@ -147,6 +149,7 @@ cmd-shift-8 = 'move-node-to-workspace 8'
 cmd-shift-9 = 'move-node-to-workspace 9'
 cmd-shift-0 = 'move-node-to-workspace 10'
 
+cmd-shift-p = 'move-node-to-workspace 11'
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 cmd-tab = 'workspace-back-and-forth'
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor

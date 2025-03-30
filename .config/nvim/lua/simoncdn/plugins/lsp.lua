@@ -26,7 +26,7 @@ return {
 					"tailwindcss",
 					"ts_ls",
 					"volar",
-					"vuels",
+					-- "vuels",
 					"yamlls",
 					"grammarly",
 					"css_variables",
@@ -114,7 +114,18 @@ return {
 						lsp.tailwindcss.setup({
 							capabilities = lsp_capabilities,
 							cmd = { "tailwindcss-language-server", "--stdio" },
-							filetypes = { "html", "css", "scss", "javascript", "typescript", "vue" },
+							filetypes = {
+								"html",
+								"css",
+								"scss",
+								"javascript",
+								"typescript",
+								"vue",
+								"javascriptreact",
+								"typescriptreact",
+								"typescript.tsx",
+								"javascript.jsx",
+							},
 							init_options = {
 								userLanguages = {
 									html = "html",
@@ -262,7 +273,7 @@ return {
 					["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
+					["<C-y>"] = cmp.mapping.complete(), -- show completion suggestions
 					["<C-e>"] = cmp.mapping.abort(), -- close completion window
 					["<Enter>"] = cmp.mapping.confirm({ select = false }),
 				}),
