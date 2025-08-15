@@ -11,7 +11,6 @@ return {
 		},
 
 		config = function()
-			local lsp = require("lspconfig")
 			local cmplsp = require("cmp_nvim_lsp")
 			local masonconfig = require("mason-lspconfig")
 
@@ -19,156 +18,56 @@ return {
 
 			masonconfig.setup({
 				ensure_installed = {
-					"emmet_ls",
-					"emmet_language_server",
-					"eslint",
-					"lua_ls",
-					"tailwindcss",
-					"ts_ls",
-					"volar",
-					-- "vuels",
-					"yamlls",
-					"grammarly",
-					"css_variables",
-					"cssmodules_ls",
-					"cssls",
-					"marksman",
-					"jsonls",
-					"html",
-					"bashls",
-				},
-				handlers = {
-
-					-- Default setup
-					function(server_name)
-						lsp[server_name].setup({
-							capabilities = lsp_capabilities,
-						})
-					end,
-
-					-- Lua setup
-					["lua_ls"] = function()
-						lsp.lua_ls.setup({
-							capabilities = lsp_capabilities,
-							on_init = function(client)
-								client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-									runtime = { version = "LuaJIT" },
-									-- Make the server aware of Neovim runtime files
-									workspace = {
-										checkThirdParty = false,
-										library = { vim.env.VIMRUNTIME },
-									},
-								})
-							end,
-							settings = {
-								Lua = {},
-							},
-						})
-					end,
-
-					-- Ts setup
-					["ts_ls"] = function()
-						local mason_registry = require("mason-registry")
-						local vue_language_server_path = mason_registry
-							.get_package("vue-language-server")
-							:get_install_path() .. "/node_modules/@vue/language-server"
-
-						lsp.ts_ls.setup({
-							capabilities = lsp_capabilities,
-							cmd = { "typescript-language-server", "--stdio" },
-							root_dir = lsp.util.root_pattern("package.json", "tsconfig.json", "jsconfig.json", ".git"),
-							filetypes = {
-								"javascript",
-								"javascriptreact",
-								"javascript.jsx",
-								"typescript",
-								"typescriptreact",
-								"typescript.tsx",
-							},
-							init_options = {
-								plugins = {
-									{
-										name = "@vue/typescript-plugin",
-										location = vue_language_server_path,
-										languages = { "vue" },
-									},
-								},
-							},
-						})
-					end,
-
-					-- Volar setup
-					["volar"] = function()
-						lsp.volar.setup({
-							capabilities = lsp_capabilities,
-							init_options = {
-								vue = {
-									hybridMode = false,
-								},
-							},
-						})
-					end,
-
-					-- Tailwind setup
-					["tailwindcss"] = function()
-						lsp.tailwindcss.setup({
-							capabilities = lsp_capabilities,
-							cmd = { "tailwindcss-language-server", "--stdio" },
-							filetypes = {
-								"html",
-								"css",
-								"scss",
-								"javascript",
-								"typescript",
-								"vue",
-								"javascriptreact",
-								"typescriptreact",
-								"typescript.tsx",
-								"javascript.jsx",
-							},
-							init_options = {
-								userLanguages = {
-									html = "html",
-									javascript = "javascript",
-									typescript = "javascript",
-									vue = "vue",
-								},
-							},
-							settings = {
-								tailwindCSS = {
-									validate = true,
-								},
-							},
-						})
-					end,
+					"emmet_ls", -- Emmet
+					"emmet_language_server", -- Emmet
+					"eslint", -- ESLint
+					"lua_ls", -- Lua
+					"tailwindcss", -- Tailwind CSS
+					"vtsls", -- TypeScript
+					"vue_ls", -- "vuels",
+					"yamlls", -- YAML
+					"grammarly", -- Grammarly
+					"css_variables", -- CSS Variables
+					"cssmodules_ls", -- CSS Modules
+					"cssls", -- CSS
+					"marksman", -- Markdown
+					"jsonls", -- JSON
+					"html", -- HTML
+					"bashls", -- Bash
+					"clangd", -- C / C++
+					"dockerls", -- Docker
+					"gopls", -- Go
 				},
 			})
 
-			-- Appearance
-			vim.lsp.handlers["textDocument/hover"] = function(_, result, ctx, config)
-				config = config
-					or {
-						border = {
-							{ "╭", "FloatBorder" },
-							{ "─", "FloatBorder" },
-							{ "╮", "FloatBorder" },
-							{ "│", "FloatBorder" },
-							{ "╯", "FloatBorder" },
-							{ "─", "FloatBorder" },
-							{ "╰", "FloatBorder" },
-							{ "│", "FloatBorder" },
+			vim.lsp.config("*", {
+				capabilities = lsp_capabilities,
+			})
+
+			local vue_language_server_path = vim.fn.expand("$MASON/packages")
+				.. "/vue-language-server"
+				.. "/node_modules/@vue/language-server"
+			local tsserver_filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" }
+			local vtsls_config = {
+				settings = {
+					vtsls = {
+						tsserver = {
+							globalPlugins = {
+								{
+									name = "@vue/typescript-plugin",
+									location = vue_language_server_path,
+									languages = { "vue" },
+									configNamespace = "typescript",
+								},
+							},
 						},
-					}
-				config.focus_id = ctx.method
-				if not (result and result.contents) then
-					return
-				end
-				local markdown_lines = vim.lsp.util.convert_input_to_markdown_lines(result.contents)
-				if vim.tbl_isempty(markdown_lines) then
-					return
-				end
-				return vim.lsp.util.open_floating_preview(markdown_lines, "markdown", config)
-			end
+					},
+				},
+				filetypes = tsserver_filetypes,
+			}
+			local vue_ls_coonfig = {}
+			vim.lsp.config("vtsls", vtsls_config)
+			vim.lsp.config("vtsls", vtsls_config)
 
 			vim.diagnostic.config({
 				float = {
@@ -184,7 +83,9 @@ return {
 					local opts = { buffer = event.buf }
 
 					-- Mappings
-					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+					vim.keymap.set("n", "K", function()
+						vim.lsp.buf.hover({ border = "rounded" })
+					end)
 					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 					vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 					vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts)
@@ -295,7 +196,7 @@ return {
 
 			mason.setup({
 				ui = {
-					theme = "tokyonight",
+					theme = "rose-pine",
 					border = "rounded",
 					icons = {
 						package_installed = "✓",
